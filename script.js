@@ -105,16 +105,17 @@ const gameOfLife = () => {
         cells_next[i] = new Array(y_length);
     }
 
-    for (let x=0; x<x_length; x++) {
-        for (let y=0; y<y_length; y++) {
+    for (let y=0; y<y_length; y++) {
+        for (let x=0; x<x_length; x++) {
             cells[x][y] = checked[y_length*y + x];
             cells_next[x][y] = 0;
         }
     }
-
+    console.log(cells[1][1], cells[2][1], cells[3][1])
     //запускаем игру - расчет след состояния
     for(let i=0; i<100; i++) {
-        setTimeout(function () { }, 1000);
+        setTimeout(function () { }, 200);
+        console.log(cells[1][1], cells[2][1], cells[3][1])
 
         for (let x=0; x<x_length; x++) {
             for (let y=0; y<y_length; y++) {
@@ -131,17 +132,17 @@ const gameOfLife = () => {
 
         
         //копируем и рисуем состояния
-        for (let x=0; x<x_length; x++) {
-            for (let y=0; y<y_length; y++) {
+        for (let y=0; y<y_length; y++) {
+            for (let x=0; x<x_length; x++) {
                 cells[x][y] = cells_next[x][y];
                 cells_next[x][y] = 0;
 
                 if (cells[x][y] == 1) {
-                    listOfCells[y_length*y+x].style.backgroundColor = "rgba(256, 0 , 0, 0.5)";     
-                    listOfCells[y_length*y+x].style.border = "1px solid rgba(256, 0 , 0, 1)";  
+                    listOfCells[y_length*y + x].style.backgroundColor = "rgba(256, 0 , 0, 0.5)";     
+                    listOfCells[y_length*y + x].style.border = "1px solid rgba(256, 0 , 0, 1)";  
                 } else {
-                    listOfCells[y_length*y+x].style.backgroundColor = "transparent";   
-                    listOfCells[y_length*y+x].style.border = "1px solid rgba(256, 0 , 0, .1)";
+                    listOfCells[y_length*y + x].style.backgroundColor = "transparent";   
+                    listOfCells[y_length*y + x].style.border = "1px solid rgba(256, 0 , 0, .1)";
                 }
             }
         }
