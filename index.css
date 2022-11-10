@@ -5,7 +5,8 @@
 }
   
 .header {
-    height: 10px;
+    height: 100px;
+    padding-bottom: 20px;
 }
 
 .board {
@@ -64,4 +65,8 @@
     position: absolute;
     top: 60%;
     right: 30px;
+}
+
+.footer {
+    height: 100px;
 }

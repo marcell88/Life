@@ -8,13 +8,22 @@
 </head>
 
 <body class="page">
-  <header class="header"></header>
+  <header class="header">
+    <ul class="header__rules"> 
+      <li>Вокруг клетки 8 соседей (диагональ считаются)</li>
+      <li>У клетки 2 состояния - мертвая (пуста), живая (заполненная)</li>
+      <li>Рождается - если рядом 3 живые</li>
+      <li>НЕ умирает живая - если рядом 2 или 3 живые</li>
+      <li>В остальных случаях - не рождаются, а живые - умирают</li>
+    </ul>
+  </header>
   <section class="board">
     <div class="board__space"></div>
     <button class = "board__button-launch">Начни эволюцию!</button>
     <button class = "board__button-stop">Стоп</button>
     <button class = "board__button-reset">Сброс</button>
   </section>
+  <footer class="footer"></footer>
   <script src="./script.js"></script>
 </body>
 </html>
