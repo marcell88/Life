@@ -1,0 +1,14 @@
+.board__cell-container {
+    box-sizing: border-box;
+    height:10px;
+    width:10px;
+    border: 1px solid rgba(256, 0 , 0, 0.1);
+    padding: 0;
+    background-color: transparent;
+    transition: background-color 0.1s;
+    border-radius: 3px;
+}
+
+.board__cell-container:hover {
+    background-color: lightgrey;
+}

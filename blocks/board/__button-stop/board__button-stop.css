@@ -1,0 +1,17 @@
+.board__button-stop {
+    border: 2px solid grey;
+    border-radius: 10px;
+    color: grey;
+    background-color: #e9e9e9;
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s, transform 0.1s;
+}
+
+.board__button-stop:hover {
+    color: white;
+    background-color: rgba(0,0,256,0.8);
+    border-color: rgba(0,0,256,0.8)
+}
+
+.board__button-stop:active {
+    transform: scale(1.2);
+}

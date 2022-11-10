@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game of life</title>
-  <link href="./index.css" rel="stylesheet">
+  <link href="./styles.css" rel="stylesheet">
 </head>
 
 <body class="page">
@@ -21,13 +21,22 @@
   </header>
 
   <!--Поле для игры жизнь-->
-  <section class="board">
-    <div class="board__menu"></div>
-    <div class="board__space"></div>
-    <div class="board__control-panel">
-      <button class = "board__button-launch">Начни эволюцию!</button>
-      <button class = "board__button-stop">Стоп</button>
-      <button class = "board__button-reset">Сброс</button>
+  <section class="main">
+    <form class="menu">
+      
+    </form>
+
+    <div class="board">
+      <div class="board__control-panel">
+        <button class = "board__button-max">&#9654; &#9654; &#9654;</button>
+        <button class = "board__button-double">&#9654; &#9654;</button>
+        <button class = "board__button-norm">&#9654; </button>
+        <div class = "board__status">Начни эволюцию!</div>
+        <button class = "board__button-stop">&#9612;&#9612; Стоп</button>
+        <button class = "board__button-reset">Сброс</button>
+        <button class = "board__button-initial">Сначала</button>
+      </div>
+      <div class="board__space"></div>
     </div>
   </section>
 
@@ -35,6 +44,7 @@
   <footer class="footer"></footer>
 
   <!--Скрипты-->
-  <script src="./script.js"></script>
+  <script src="./scripts/script.js"></script>
+  <script src="./scripts/game_of_life.js"></script>
 </body>
 </html>
