@@ -8,22 +8,33 @@
 </head>
 
 <body class="page">
+  
+  <!--Шапка сайта - правила кратко и логотип-->
   <header class="header">
     <ul class="header__rules"> 
-      <li>Вокруг клетки 8 соседей (диагональ считаются)</li>
-      <li>У клетки 2 состояния - мертвая (пуста), живая (заполненная)</li>
-      <li>Рождается - если рядом 3 живые</li>
-      <li>НЕ умирает живая - если рядом 2 или 3 живые</li>
-      <li>В остальных случаях - не рождаются, а живые - умирают</li>
+      <li class="header__rules-text">&#8594; Вокруг клетки 8 соседей (диагональные считаются соседями)</li>
+      <li class="header__rules-text">&#8594; У клетки 2 состояния: мертвая (пуста), живая (заполненная)</li>
+      <li class="header__rules-text">&#8594; Рождается новая клетка, если рядом 3 живые</li>
+      <li class="header__rules-text">&#8594; НЕ умирает живая, если рядом 2 или 3 живые</li>
+      <li class="header__rules-text">&#8594; В остальных случаях: новые не рождаются, а живые - умирают</li>
     </ul>
   </header>
+
+  <!--Поле для игры жизнь-->
   <section class="board">
+    <div class="board__menu"></div>
     <div class="board__space"></div>
-    <button class = "board__button-launch">Начни эволюцию!</button>
-    <button class = "board__button-stop">Стоп</button>
-    <button class = "board__button-reset">Сброс</button>
+    <div class="board__control-panel">
+      <button class = "board__button-launch">Начни эволюцию!</button>
+      <button class = "board__button-stop">Стоп</button>
+      <button class = "board__button-reset">Сброс</button>
+    </div>
   </section>
+
+  <!--Футер-->
   <footer class="footer"></footer>
+
+  <!--Скрипты-->
   <script src="./script.js"></script>
 </body>
 </html>
