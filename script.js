@@ -1,8 +1,11 @@
 const createCell = () => {
     var board__space = document.querySelector(".board__space");
+    var cell_container = document.createElement("div");
     var cell = document.createElement("div");
+    cell_container.className='board__cell-container';
     cell.className='board__cell';
-    board__space.appendChild(cell);
+    board__space.appendChild(cell_container);
+    cell_container.appendChild(cell);    
 }
 
 //Количество живых соседей
@@ -66,12 +69,12 @@ const gameOfLife = () => {
             cells[x][y] = cells_next[x][y];
             cells_next[x][y] = 0;
             if (cells[x][y] == 1) {
-                listOfCells[columns*y + x].style.backgroundColor = "rgba(256, 0 , 0, 0.5)";     
-                listOfCells[columns*y + x].style.border = "1px solid rgba(256, 0 , 0, 1)";  
+                listOfCells[columns*y + x].style.backgroundColor = "rgba(256, 0 , 0, 1)";     
+
                 checked[columns*y + x] = 1;
             } else {
                 listOfCells[columns*y + x].style.backgroundColor = "transparent";   
-                listOfCells[columns*y + x].style.border = "1px solid rgba(256, 0 , 0, .1)";
+
                 checked[columns*y + x] = 0;
             }
         }
@@ -79,8 +82,7 @@ const gameOfLife = () => {
 }
 
 const launch = () => {
-    if (k<max) {
-        k++;
+    if (stop) {
         gameOfLife();
         setTimeout(launch, 150);
     }   
@@ -98,16 +100,15 @@ for (let i=0; i < 70*70; i++) {
 }
 
 var listOfCells = document.querySelectorAll(".board__cell");
+var listOfCont = document.querySelectorAll(".board__cell-container");
 
 for (let i=0; i<listOfCells.length; i++) {
-    listOfCells[i].onclick = () => {
+    listOfCont[i].onclick = () => {
         if (checked[i] == 0) {
-            listOfCells[i].style.backgroundColor = "rgba(256, 0 , 0, 0.5)";     
-            listOfCells[i].style.border = "1px solid rgba(256, 0 , 0, 1)";   
+            listOfCells[i].style.backgroundColor = "rgba(256, 0 , 0, 1)";     
             checked[i] = 1; 
         } else if (checked[i] == 1) {
-            listOfCells[i].style.backgroundColor = "transparent";   
-            listOfCells[i].style.border = "1px solid rgba(256, 0 , 0, .1)";    
+            listOfCells[i].style.backgroundColor = "transparent";     
             checked[i] = 0;          
         } else {
             console.log("Error");
@@ -115,8 +116,23 @@ for (let i=0; i<listOfCells.length; i++) {
     }
 }
 
-var button = document.querySelector(".board__button");
+let stop = true;
+var button_launch = document.querySelector(".board__button-launch");
+button_launch.onclick = () => {
+    stop = true;
+    launch();
+}
 
-let k = 0;
-let max = 1000;
-button.onclick = launch;
+var button_stop = document.querySelector(".board__button-stop");
+button_stop.onclick = () => {
+    stop = false;
+}
+
+var button_reset = document.querySelector(".board__button-reset");
+button_reset.onclick = () => {
+    stop = false;
+    for (let i=0; i<listOfCells.length; i++) {
+        listOfCells[i].style.backgroundColor = "transparent";   
+        checked[i] = 0;   
+    }
+}
