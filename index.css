@@ -5,7 +5,7 @@
 @import url(./blocks/header/__rules-text/header__rules-text.css);
 
 @import url(./blocks/board/board.css);
-
+@import url(./blocks/board/__control-panel/board__control-panel.css);
 
 
 
