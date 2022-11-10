@@ -117,15 +117,22 @@ for (let i=0; i<listOfCells.length; i++) {
 }
 
 let stop = true;
+let launch_flag = true;
 var button_launch = document.querySelector(".board__button-launch");
 button_launch.onclick = () => {
-    stop = true;
-    launch();
+    if (launch_flag) {
+        stop = true;
+        launch_flag  = false;
+        button_launch.textContent = "Идет эволюция..."
+        launch();
+    }
 }
 
 var button_stop = document.querySelector(".board__button-stop");
 button_stop.onclick = () => {
     stop = false;
+    launch_flag  = true;
+    button_launch.textContent = "Начни эволюцию!"
 }
 
 var button_reset = document.querySelector(".board__button-reset");
