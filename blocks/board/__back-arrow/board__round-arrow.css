@@ -1,0 +1,7 @@
+.board__round-arrow {
+    display: block;
+    font-size: 30px;
+    position: absolute;
+    left: 7px;
+    top: -8px;
+}

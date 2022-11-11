@@ -1,0 +1,7 @@
+.board__back-arrow {
+    display: block;
+    font-size: 20px;
+    position: absolute;
+    left: 7px;
+    top: 2px;
+}

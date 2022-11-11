@@ -68,3 +68,33 @@ const gameOfLife = (array, list, rows, columns) => {
 
     return result;
 }
+
+const isCycle = (array, list, rows, columns, deep) => {
+    let future = new Array(deep+1);
+    let difference = new Array(deep);
+    let product = 1;
+    
+    //0 состоние - текущее
+    future[0] = new Array(rows*columns);
+    for (let i=0; i<rows*columns; i++) {
+        future[0][i] = array[i];
+    }
+
+    //формируем массив новых состояний на n вперед
+    for (let i=1; i<=deep; i++) {
+        future[i] = gameOfLife(future[i-1], list, rows, columns)
+        difference[i-1]=0;
+    }
+
+    //считаем разницу
+    for (let i=0; i<deep; i++) {  
+        for(let j=0; j<rows*columns; j++) {
+            if (future[0][j] != future[i+1][j]) {
+                difference[i]++;
+            }
+        }
+        product = product * difference[i];
+    }
+
+    return (product>0);
+}

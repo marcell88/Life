@@ -16,6 +16,8 @@
 @import url(./blocks/board/__button-stop/board__button-stop.css);
 @import url(./blocks/board/__button-reset/board__button-reset.css);
 @import url(./blocks/board/__button-initial/board__button-initial.css);
+@import url(./blocks/board/__round-arrow/board__back-arrow.css);
+@import url(./blocks/board/__back-arrow/board__round-arrow.css);
 
 @import url(./blocks/footer/footer.css);
 

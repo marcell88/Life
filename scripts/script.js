@@ -10,11 +10,35 @@ const createCell = () => {
     cell_container.appendChild(cell);    
 }
 
-//Запуск эволюци...
+//Запуск эволюци... С использованием идей event loop немножечко - чтобы видеть результат каждого шага
 const launch = () => {
-    if (stop) {
-        states = gameOfLife(states, listOfCells, rows, columns);
-        setTimeout(launch, velocity);
+    if (interation_goes_on) {
+
+        cycle_flag = isCycle(states, listOfCells, rows, columns, cycle_depth);
+        nochange_flag = isCycle(states, listOfCells, rows, columns, 1);
+
+        //Если заклилась - продолжаем эволюцию, но выводим сообщеение об этом
+        if (cycle_flag) {
+            status_evol.textContent = "Идет эволюция..."
+            status_evol.style.color = "brown";
+            states = gameOfLife(states, listOfCells, rows, columns);
+            setTimeout(launch, velocity);
+        } else {
+            status_evol.textContent = "Цикл <= "+cycle_depth;
+            status_evol.style.color = "green";  
+
+            //Если ситуация остановилась - то останавливаем
+            if (nochange_flag) {
+                states = gameOfLife(states, listOfCells, rows, columns);
+                setTimeout(launch, velocity);
+            } else {
+                status_evol.textContent = "Предел (стоп)";
+                status_evol.style.color = "green";      
+                interation_goes_on = false;
+                launch_flag  = true;
+                nochange_flag = true;
+            }
+        }
     }   
 }
 
@@ -24,12 +48,17 @@ const launch = () => {
 //Глобальные переменные
 let rows = 70;
 let columns = 70;
+let cycle_depth = 2; //Глубина проверки заклинности
 let states = []; //Массив состояний
 let initial = []; //Для сохранения начального состояния
-let stop = true; //Остановка итераций
-let launch_flag = true; //Флаг - если истина то кнопки запуска сработают, иначе - не будут реагировать
-let initial_flag = true; //Истина до первого запуска - это будет начальная расстановка
 let velocity; //Скорость итераций
+
+//Флаги
+let interation_goes_on = false; //Истина - итерации продолжаются и не останавливаются
+let launch_flag = true; //Иситна - если на клавиши запуска еще не нажимали (иначе они не сработают)
+let initial_flag = true; //Истина - если не был осуществлен первый заапуск (это будет начальная расстановка)
+let cycle_flag = true; //Истина - если не заклился (глубина через параметр)
+let nochange_flag = true;  //Истина - если не остановилась (цикл глубиной 1)
 
 //Отстраиваем поле
 var board__space = document.querySelector(".board__space");
@@ -48,6 +77,7 @@ var listOfCells = document.querySelectorAll(".board__cell");
 var listOfCont = document.querySelectorAll(".board__cell-container");
 for (let i=0; i<listOfCells.length; i++) {
     listOfCont[i].onclick = () => {
+        cycle_flag = true;
         if (states[i] == 0) {
             listOfCells[i].style.backgroundColor = "rgba(256, 0 , 0, 1)";     
             states[i] = 1; 
@@ -75,7 +105,7 @@ button_norm.onclick = () => {
         }
     }
     if (launch_flag) {
-        stop = true;
+        interation_goes_on = true;
         launch_flag  = false;
         status_evol.textContent = "Идет эволюция...";
         status_evol.style.color = "brown";
@@ -94,7 +124,7 @@ button_double.onclick = () => {
         }
     }
     if (launch_flag) {
-        stop = true;
+        interation_goes_on = true;
         launch_flag  = false;
         status_evol.textContent = "Идет эволюция..."
         status_evol.style.color = "brown";
@@ -113,7 +143,7 @@ button_max.onclick = () => {
         }
     }
     if (launch_flag) {
-        stop = true;
+        interation_goes_on = true;
         launch_flag  = false;
         status_evol.textContent = "Идет эволюция..."
         status_evol.style.color = "brown";
@@ -124,7 +154,7 @@ button_max.onclick = () => {
 //Кнопка - Остановка
 var button_stop = document.querySelector(".board__button-stop");
 button_stop.onclick = () => {
-    stop = false;
+    interation_goes_on = false;
     launch_flag  = true;
     status_evol.textContent = "Начни эволюцию!";
     status_evol.style.color = "#595858";
@@ -133,9 +163,10 @@ button_stop.onclick = () => {
 //Кнопка - Сброс
 var button_reset = document.querySelector(".board__button-reset");
 button_reset.onclick = () => {
-    stop = false;
+    interation_goes_on = false;
     launch_flag  = true;
     initial_flag = true;
+    nochange_flag = true;
     for (let i=0; i<listOfCells.length; i++) {
         listOfCells[i].style.backgroundColor = "transparent";   
         states[i] = 0;   
@@ -147,9 +178,10 @@ button_reset.onclick = () => {
 //Кнопка - Сначала
 var button_initial = document.querySelector(".board__button-initial");
 button_initial.onclick = () => {
-    stop = false;
+    interation_goes_on = false;
     launch_flag  = true;
     initial_flag = true;
+    nochange_flag = true;
     states = initial;
     for (let i=0; i<rows*columns; i++) {
         if (states[i] == 1) {
