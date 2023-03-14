@@ -1,4 +1,42 @@
-//ФУНКЦИИ
+
+//ИМПОРТ=====================================================================================================================
+
+import '../pages/index.css';
+
+import { Board } from '../components/Board';
+import { Section } from '../components/Section';
+
+
+
+//ФУНКЦИИ=====================================================================================================================
+
+const handleCellClick = () => {
+
+}
+
+const getInfoFromBoard = () => {
+
+}
+
+//СКРИПТ=====================================================================================================================
+
+//Задаем начальные состояние клеток
+
+
+
+const board = new Board({width:10, height:10}, {handleCellClick}, '.board__space');
+const boardSection = new Section(board);
+console.log(board.cells);
+
+
+
+
+
+
+
+
+
+/*
 //Строим одну ячейку
 const createCell = () => {
     var board__space = document.querySelector(".board__space");
@@ -193,3 +231,4 @@ button_initial.onclick = () => {
     status_evol.textContent = "Начни эволюцию!";
     status_evol.style.color = "#595858";
 }
+*/
