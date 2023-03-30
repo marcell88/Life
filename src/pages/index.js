@@ -24,9 +24,15 @@ const getInfoFromBoard = () => {
 
 
 
-const board = new Board({width:10, height:10}, {handleCellClick}, '.board__space');
-const boardSection = new Section(board);
-console.log(board.cells);
+const board = new Board( {width:10, height:10}, {handleCellClick} );
+board.setState(1, 0);
+board.setState(1, 1);
+board.setState(1, 2);
+
+for(let i =0; i<10; i++) {
+    console.log(board.getCell(0, 1).state);
+    board.makeRound();
+}
 
 
 
